@@ -4,15 +4,6 @@ require 'open-uri'
 
 
 page = Nokogiri::HTML(open("https://coinmarketcap.com/all/views/all/"))
-#puts page 
-
-#bitcoin
-# absolute = /html[1]/body[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[2]/a[1]
-# relative = //tr[@id='id-bitcoin']//td[@class='text-left col-symbol'][contains(text(),'BTC')]
-
-#price
-#absolute = /html[1]/body[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[5]/a[1]
-#relative = //a[contains(text(),'480,46')]
 
 def currencies(page)
     begin
@@ -59,10 +50,12 @@ def dark_trader(page)
     puts "currency_array : "
     print currencies_array
     prices_array = prices(page)
+    result = combine_arrays_to_hash(currencies_array,prices_array)
     puts "prices array : "
     print prices_array
     puts "combination : "
-    print combine_arrays_to_hash(currencies_array,prices_array)
+    print result
+    return result 
 end 
 
 dark_trader(page)
